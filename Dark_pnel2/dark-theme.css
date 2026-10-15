@@ -1,0 +1,116 @@
+/* ═══════════════════════════════════════════════════════════════
+   DARK PANEL — V1 theme layer
+   Loaded last on every page, so it overrides the base styles.
+   Dark mode only: the light theme keeps its original look.
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-theme="dark"]{
+  --dp-acc:#e11d48;--dp-acc2:#ff4d6d;--dp-acc3:#9f1239;--dp-violet:#7c3aed;
+  --dp-bg:#05050a;--dp-card:#0b0b12;--dp-card2:#10101a;--dp-line:rgba(255,255,255,.08);
+
+  /* panel (index) variables */
+  --bg:#05050a;--bg2:#0b0b12;--bg3:#10101a;--input-bg:#0a0a11;
+  --txt:#f2f2f6;--txt2:#a3a3b3;
+  --border:rgba(255,255,255,.08);--line:rgba(255,255,255,.10);
+  --neon:#ff4d6d;--neon2:#ff7a93;--teal:#ff4d6d;--green:#34d399;--success:#34d399;
+  --blue:#a78bfa;--purple:#a78bfa;--red:#ff4d6d;--danger:#ff4d6d;--gold:#fbbf24;--warning:#fbbf24;
+  --grad1:#ff4d6d;--grad2:#e11d48;
+  --grad:linear-gradient(135deg,#ff4d6d,#e11d48 60%,#9f1239);
+  --gradient:linear-gradient(135deg,#ff4d6d,#e11d48 60%,#9f1239);
+  --tab-bg:#e11d48;--tab-color:#fff;
+  --nav-bg:rgba(225,29,72,.14);--nav-color:#ff7a93;
+  --border-glow:rgba(255,77,109,.55);--input-glow:rgba(225,29,72,.22);
+  --glow:0 0 22px rgba(225,29,72,.35);--glow-strong:0 0 34px rgba(225,29,72,.55);
+  --glass:#0b0b12;--surface-glass:#0b0b12;--orb1:rgba(225,29,72,.10);--orb2:rgba(124,58,237,.08);
+
+  /* subscription page (sub.html) variables */
+  --bg-page:#05050a;--card:rgba(14,14,22,.82);--card-subtle:rgba(20,20,30,.78);
+  --text:#f2f2f6;--muted:#9a9aab;
+  --accent:#ff4d6d;--accent-contrast:#ffffff;
+  --border-strong:rgba(255,77,109,.45);
+  --ring-fill:#ff4d6d;--ring-track:rgba(255,255,255,.10);
+  --glow-color:rgba(225,29,72,.45);
+  --btn-ctrl-bg:rgba(255,255,255,.06);--btn-ctrl-hover:rgba(225,29,72,.22);
+  --modal-bg:rgba(12,12,20,.92);--modal-sidebar:rgba(8,8,14,.8);
+}
+
+/* page background: deep night with a faint crimson/violet aurora */
+[data-theme="dark"] body{
+  background:
+    radial-gradient(900px 520px at 85% -8%,rgba(225,29,72,.13),transparent 60%),
+    radial-gradient(700px 480px at -5% 105%,rgba(124,58,237,.10),transparent 60%),
+    #05050a !important;
+  background-attachment:fixed !important;
+}
+
+/* ── panel surfaces ── */
+[data-theme="dark"] .sidebar,
+[data-theme="dark"] .topbar,
+[data-theme="dark"] .panel,
+[data-theme="dark"] .stat,
+[data-theme="dark"] .tbl,
+[data-theme="dark"] .u-card,
+[data-theme="dark"] .modal-c,
+[data-theme="dark"] .login-card,
+[data-theme="dark"] .settings-box{
+  background:linear-gradient(180deg,#0e0e16,#0a0a11) !important;
+  border:1px solid rgba(255,255,255,.07) !important;
+  box-shadow:0 10px 34px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+[data-theme="dark"] .sidebar{border-right:1px solid rgba(225,29,72,.18) !important;border-left:1px solid rgba(225,29,72,.18) !important}
+[data-theme="dark"] .panel:hover,
+[data-theme="dark"] .stat:hover,
+[data-theme="dark"] .u-card:hover{border-color:rgba(255,77,109,.35) !important;box-shadow:0 14px 40px rgba(0,0,0,.65),0 0 24px rgba(225,29,72,.14) !important}
+
+/* ── navigation ── */
+[data-theme="dark"] .nav-item{color:#b4b4c4 !important;border:1px solid transparent !important;transition:.2s}
+[data-theme="dark"] .nav-item:hover{background:rgba(225,29,72,.10) !important;color:#fff !important}
+[data-theme="dark"] .nav-item.active{
+  background:linear-gradient(90deg,rgba(225,29,72,.26),rgba(225,29,72,.06)) !important;
+  color:#fff !important;border-color:rgba(255,77,109,.55) !important;
+  box-shadow:0 0 18px rgba(225,29,72,.22) !important}
+[data-theme="dark"] .sb-brand-t{color:#fff !important;letter-spacing:.22em;text-shadow:0 0 16px rgba(225,29,72,.55) !important}
+[data-theme="dark"] .sb-brand-s{color:#ff7a93 !important;letter-spacing:.3em}
+[data-theme="dark"] .sb-brand img{filter:drop-shadow(0 0 10px rgba(225,29,72,.6))}
+[data-theme="dark"] .sb-foot{color:#6c6c7e !important}
+
+/* ── buttons ── */
+[data-theme="dark"] .btn-p{
+  background:linear-gradient(135deg,#ff4d6d,#e11d48 60%,#9f1239) !important;color:#fff !important;
+  border:0 !important;box-shadow:0 8px 22px rgba(225,29,72,.35) !important;transition:.2s}
+[data-theme="dark"] .btn-p:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 12px 30px rgba(225,29,72,.5) !important}
+[data-theme="dark"] .btn-g,[data-theme="dark"] .lang-btn{
+  background:rgba(255,255,255,.04) !important;color:#e6e6ee !important;border:1px solid rgba(255,255,255,.10) !important}
+[data-theme="dark"] .btn-g:hover,[data-theme="dark"] .lang-btn:hover{background:rgba(225,29,72,.14) !important;border-color:rgba(255,77,109,.45) !important}
+[data-theme="dark"] .btn-r{background:rgba(225,29,72,.22) !important;color:#ffd0d9 !important;border:1px solid rgba(255,77,109,.35) !important}
+[data-theme="dark"] .btn-b{background:rgba(124,58,237,.24) !important;color:#e4d9ff !important;border:1px solid rgba(167,139,250,.35) !important}
+
+/* ── inputs ── */
+[data-theme="dark"] .f-g input,[data-theme="dark"] .f-g select,[data-theme="dark"] .f-g textarea,
+[data-theme="dark"] .input-glass{
+  background:#0a0a11 !important;color:#f2f2f6 !important;border:1px solid rgba(255,255,255,.10) !important;border-radius:12px}
+[data-theme="dark"] .f-g input:focus,[data-theme="dark"] .f-g select:focus,[data-theme="dark"] .f-g textarea:focus{
+  border-color:#ff4d6d !important;box-shadow:0 0 0 4px rgba(225,29,72,.18) !important;outline:none}
+
+/* ── switches / misc ── */
+[data-theme="dark"] .ios-switch.on{background:linear-gradient(135deg,#ff4d6d,#e11d48) !important}
+[data-theme="dark"] .theme-dot.active{border-color:#ff4d6d;box-shadow:0 0 12px #ff4d6d}
+[data-theme="dark"] th{color:#ff7a93 !important}
+[data-theme="dark"] tr:hover td{background:rgba(225,29,72,.05)}
+[data-theme="dark"] .panel-h .glow,[data-theme="dark"] .glow{text-shadow:0 0 14px rgba(225,29,72,.45) !important}
+[data-theme="dark"] ::-webkit-scrollbar-thumb{background:rgba(225,29,72,.35)}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background:rgba(255,77,109,.6)}
+[data-theme="dark"] ::selection{background:rgba(225,29,72,.45);color:#fff}
+
+/* ── subscription page ── */
+[data-theme="dark"] .bg-wallpaper{opacity:.55 !important;filter:grayscale(1) contrast(1.1) blur(2px) !important}
+[data-theme="dark"] .bg-overlay{
+  background:
+    radial-gradient(800px 480px at 80% 0%,rgba(225,29,72,.16),transparent 62%),
+    radial-gradient(circle at center,rgba(5,5,10,.55) 0%,rgba(5,5,10,.94) 100%) !important}
+[data-theme="dark"] .tilt-card{border:1px solid rgba(255,255,255,.08);box-shadow:0 14px 44px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.05)}
+[data-theme="dark"] .tilt-card:hover{border-color:rgba(255,77,109,.4)}
+[data-theme="dark"] .site-foot{color:#6c6c7e;letter-spacing:.2em}
+
+/* brand-link bubbles hidden until branding.js fills them */
+.contact-bubble[data-brand],.social-card[data-brand]{transition:.2s}
