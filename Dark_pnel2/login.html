@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#05050a">
+<title>Dark Panel — Sign in</title>
+<link rel="icon" type="image/svg+xml" href="/static/dark-logo.svg">
+<style>
+:root{
+  --bg:#05050a;
+  --card:rgba(10,10,16,.62);
+  --line:rgba(255,255,255,.10);
+  --txt:#ececf1;
+  --mut:#8b8b99;
+  --acc:#e11d48;
+  --acc2:#ff4d6d;
+  --glow:0 0 38px rgba(225,29,72,.45);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--txt);overflow:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Tahoma,Roboto,'Helvetica Neue',Arial,sans-serif}
+input,button{font-family:inherit}
+
+/* ── background art ── */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden}
+.bg-img{position:absolute;inset:-2%;background:url('/static/img/bg.jpg') center 20%/cover no-repeat;
+  filter:grayscale(1) contrast(1.15) brightness(.78);animation:drift 28s ease-in-out infinite alternate}
+.bg::after{content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(1000px 600px at 78% 12%,rgba(225,29,72,.20),transparent 62%),
+    radial-gradient(800px 500px at 10% 100%,rgba(124,58,237,.14),transparent 60%),
+    linear-gradient(180deg,rgba(5,5,10,.35) 0%,rgba(5,5,10,.78) 70%,#05050a 100%)}
+@keyframes drift{from{transform:scale(1.04) translate3d(0,0,0)}to{transform:scale(1.12) translate3d(-1.2%,1.2%,0)}}
+
+/* floating embers */
+.embers{position:fixed;inset:0;z-index:1;pointer-events:none}
+.embers i{position:absolute;bottom:-12px;width:3px;height:3px;border-radius:50%;
+  background:var(--acc2);box-shadow:0 0 10px var(--acc2);opacity:0;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0) scale(.6);opacity:0}12%{opacity:.9}100%{transform:translateY(-105vh) scale(1.3);opacity:0}}
+
+/* ── layout ── */
+.wrap{position:relative;z-index:2;height:100%;display:flex;align-items:center;justify-content:center;padding:20px}
+.tag{position:fixed;top:max(18px,env(safe-area-inset-top));left:20px;z-index:3;display:flex;gap:8px;
+  font:700 11px/1 ui-monospace,'JetBrains Mono',Menlo,monospace;letter-spacing:.18em;color:rgba(255,255,255,.55)}
+.tag span{padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.45);backdrop-filter:blur(8px)}
+.tag span.v{color:#fff;border-color:rgba(225,29,72,.55);box-shadow:0 0 14px rgba(225,29,72,.35)}
+
+.card{width:100%;max-width:410px;padding:34px 30px 28px;border-radius:26px;
+  background:var(--card);border:1px solid var(--line);
+  backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);
+  box-shadow:0 30px 80px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.07);
+  position:relative;animation:pop .7s cubic-bezier(.2,.8,.2,1) both}
+.card::before{content:"";position:absolute;inset:-1px;border-radius:27px;padding:1px;pointer-events:none;
+  background:linear-gradient(140deg,rgba(255,77,109,.7),transparent 35%,transparent 65%,rgba(124,58,237,.55));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+
+.head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;margin-bottom:26px}
+.head img{width:92px;height:92px;filter:drop-shadow(0 0 18px rgba(225,29,72,.55));animation:pulse 4.5s ease-in-out infinite}
+@keyframes pulse{50%{filter:drop-shadow(0 0 30px rgba(255,77,109,.85))}}
+.head h1{font-size:25px;font-weight:800;letter-spacing:.34em;padding-left:.34em;color:#fff;text-shadow:0 0 22px rgba(225,29,72,.5)}
+.head p{font-size:12px;color:var(--mut);letter-spacing:.08em}
+
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font:700 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.2em;color:var(--mut)}
+.inp{position:relative}
+.inp > svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--mut);pointer-events:none}
+.inp input{width:100%;height:50px;border-radius:15px;padding:0 46px;font-size:14.5px;color:#fff;
+  background:rgba(0,0,0,.55);border:1px solid var(--line);outline:none;transition:.25s}
+.inp input::placeholder{color:#5d5d6b}
+.inp input:focus{border-color:var(--acc2);box-shadow:0 0 0 4px rgba(225,29,72,.16),var(--glow)}
+.eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;border-radius:11px;
+  background:transparent;color:var(--mut);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.eye:hover{color:#fff;background:rgba(255,255,255,.06)}
+
+.err{display:none;align-items:center;gap:8px;margin-bottom:16px;padding:10px 14px;border-radius:12px;font-size:13px;
+  color:#ffb4c0;background:rgba(225,29,72,.12);border:1px solid rgba(225,29,72,.38)}
+.err.show{display:flex;animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+.go{margin-top:20px;width:100%;height:50px;border:0;border-radius:15px;cursor:pointer;color:#fff;
+  font-size:14.5px;font-weight:800;letter-spacing:.14em;display:flex;align-items:center;justify-content:center;gap:10px;
+  background:linear-gradient(135deg,#ff4d6d,#e11d48 55%,#9f1239);box-shadow:0 10px 30px rgba(225,29,72,.38);
+  transition:transform .2s,box-shadow .2s,filter .2s}
+.go:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(225,29,72,.55);filter:brightness(1.08)}
+.go:active{transform:translateY(0)}
+.go:disabled{opacity:.7;cursor:wait;transform:none}
+.spin{width:18px;height:18px;border-radius:50%;border:2.5px solid rgba(255,255,255,.35);border-top-color:#fff;animation:sp .7s linear infinite;display:none}
+.go.load .spin{display:block}.go.load .lbl{display:none}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+.foot{margin-top:22px;text-align:center;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.22em;color:#4d4d5a}
+
+@media (max-width:480px){.card{padding:28px 22px 24px;border-radius:22px}.head img{width:78px;height:78px}.head h1{font-size:21px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="bg"><div class="bg-img"></div></div>
+<div class="embers" id="embers"></div>
+
+<div class="tag"><span>2026</span><span class="v">V1</span></div>
+
+<main class="wrap">
+  <section class="card">
+    <div class="head">
+      <img src="/static/dark-logo.svg" alt="Dark Panel" onerror="this.style.display='none'">
+      <h1>DARK PANEL</h1>
+      <p>Silent. Fast. Yours.</p>
+    </div>
+
+    <div class="err" id="error-msg" role="alert">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16.5v.01"/></svg>
+      <span id="error-text"></span>
+    </div>
+
+    <form id="login-form" autocomplete="on">
+      <div class="field">
+        <label for="password">PASSWORD</label>
+        <div class="inp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="3"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+          <input id="password" type="password" placeholder="Enter password" autocomplete="current-password" autofocus required>
+          <button class="eye" id="eye" type="button" aria-label="Show password">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <button class="go" id="loginBtn" type="submit">
+        <span class="lbl" id="btn-text">SIGN IN</span>
+        <span class="spin" id="btn-spinner"></span>
+      </button>
+    </form>
+
+    <div class="foot">DARK PANEL · V1</div>
+  </section>
+</main>
+
+<script>
+(function(){
+  // embers
+  var host=document.getElementById('embers');
+  for(var i=0;i<22;i++){
+    var e=document.createElement('i');
+    e.style.left=(Math.random()*100)+'%';
+    e.style.animationDuration=(7+Math.random()*9)+'s';
+    e.style.animationDelay=(-Math.random()*12)+'s';
+    host.appendChild(e);
+  }
+
+  var pw=document.getElementById('password');
+  document.getElementById('eye').addEventListener('click',function(){
+    pw.type = pw.type==='password' ? 'text' : 'password';
+  });
+
+  document.getElementById('login-form').addEventListener('submit', async function(ev){
+    ev.preventDefault();
+    var btn=document.getElementById('loginBtn');
+    var errDiv=document.getElementById('error-msg');
+    var errText=document.getElementById('error-text');
+    errDiv.classList.remove('show');
+    btn.disabled=true; btn.classList.add('load');
+    try{
+      var r=await fetch('/api/login',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({password:pw.value})
+      });
+      if(!r.ok){
+        var d=await r.json().catch(function(){return {};});
+        throw new Error(d.detail||'Login failed');
+      }
+      location.href='/dark';
+    }catch(ex){
+      errText.textContent=ex.message;
+      void errDiv.offsetWidth;
+      errDiv.classList.add('show');
+      btn.disabled=false; btn.classList.remove('load');
+    }
+  });
+})();
+</script>
+</body>
+</html>
